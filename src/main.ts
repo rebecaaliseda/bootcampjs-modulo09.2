@@ -1,6 +1,6 @@
-import { commonPasswords, caracteresEspeciales } from './modelo';
+import { commonPasswords, caracteresEspeciales } from './validarClave/modelo';
 
-import { validarClave } from './validarClave';
+import { validarClave } from './validarClave/validarClave';
 
 // Errores
 console.log(validarClave('Rebeca', '123456789', commonPasswords, caracteresEspeciales));

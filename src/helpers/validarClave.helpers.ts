@@ -1,4 +1,4 @@
-import { ValidacionClave } from './modelo';
+import { ValidacionClave } from '../validarClave/modelo';
 
 const esClaveValida = () => {
   return {
@@ -14,6 +14,10 @@ const noEsClaveValida = (msgError: string) => {
 };
 
 export const tieneMayusculasYMinusculas = (clave: string): ValidacionClave => {
+  if (!clave) {
+    throw new Error('Alguno de los parámetros introducidos no es válido');
+  }
+
   if (clave.toLowerCase() === clave || clave.toUpperCase() === clave) {
     return noEsClaveValida('La clave debe de tener mayúsculas y minúsculas');
   } else {
@@ -22,6 +26,10 @@ export const tieneMayusculasYMinusculas = (clave: string): ValidacionClave => {
 };
 
 export const tieneNumeros = (clave: string): ValidacionClave => {
+  if (!clave) {
+    throw new Error('Alguno de los parámetros introducidos no es válido');
+  }
+
   let claveArray = clave.split('');
 
   const tieneNumeros = claveArray.some((letra: string) => !isNaN(parseInt(letra)));
@@ -33,6 +41,10 @@ export const tieneCaracteresEspeciales = (
   clave: string,
   caracteresEspeciales: string[]
 ): ValidacionClave => {
+  if (!clave || !caracteresEspeciales) {
+    throw new Error('Alguno de los parámetros introducidos no es válido');
+  }
+
   const tieneCaracteresEspeciales = caracteresEspeciales.some((caracter) =>
     clave.includes(caracter)
   );
@@ -43,12 +55,20 @@ export const tieneCaracteresEspeciales = (
 };
 
 export const tieneLongitudMinima = (clave: string): ValidacionClave => {
+  if (!clave) {
+    throw new Error('Alguno de los parámetros introducidos no es válido');
+  }
+
   return clave.length >= 8
     ? esClaveValida()
     : noEsClaveValida('La clave debe de tener una longitud mínima de 8 caracteres');
 };
 
 export const tieneNombreUsuario = (nombreUsuario: string, clave: string): ValidacionClave => {
+  if (!nombreUsuario || !clave) {
+    throw new Error('Alguno de los parámetros introducidos no es válido');
+  }
+
   const txtoClave = clave.toLowerCase();
   const txtoNombreUsuario = nombreUsuario.toLowerCase();
 
@@ -58,6 +78,10 @@ export const tieneNombreUsuario = (nombreUsuario: string, clave: string): Valida
 };
 
 export const tienePalabrasComunes = (clave: string, commonPasswords: string[]): ValidacionClave => {
+  if (!commonPasswords || !clave) {
+    throw new Error('Alguno de los parámetros introducidos no es válido');
+  }
+
   const tienePalabrasComunes = commonPasswords.some((password) =>
     clave.toLowerCase().includes(password.toLowerCase())
   );

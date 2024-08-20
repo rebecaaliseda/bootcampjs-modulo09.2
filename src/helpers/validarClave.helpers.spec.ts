@@ -1,4 +1,4 @@
-import { ValidacionClave, commonPasswords, caracteresEspeciales } from './modelo';
+import { ValidacionClave, commonPasswords, caracteresEspeciales } from '../validarClave/modelo';
 import {
   tieneMayusculasYMinusculas,
   tieneNumeros,

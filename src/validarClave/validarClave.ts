@@ -6,7 +6,7 @@ import {
   tieneLongitudMinima,
   tieneNombreUsuario,
   tienePalabrasComunes,
-} from './validarClave.helpers';
+} from '../helpers/validarClave.helpers';
 
 export const validarClave = (
   nombreUsuario: string,
@@ -14,6 +14,9 @@ export const validarClave = (
   commonPasswords: string[],
   caracteresEspeciales: string[]
 ): ValidacionClave => {
+  if (!nombreUsuario || !clave || !commonPasswords || !caracteresEspeciales) {
+    throw new Error('Alguno de los parámetros introducidos no es válido');
+  }
   let claveFinal: ValidacionClave = { esValida: false };
 
   claveFinal = tieneMayusculasYMinusculas(clave);
